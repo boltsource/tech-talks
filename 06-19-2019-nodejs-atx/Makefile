@@ -27,3 +27,9 @@ package: build
 deploy: package
 	docker push us.gcr.io/$(PROJECT_ID)/graphql-api:latest
 	kubectl apply -f kube.yaml
+
+tunnel: .PHONY
+	tunnel
+
+ngrok: .PHONY
+	ngrok http -subdomain boltsource 8080
