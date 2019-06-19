@@ -1,0 +1,57 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: my-ingress
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: "ingress"
+spec:
+  backend:
+    serviceName: graphql
+    servicePort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: graphql
+  namespace: default
+spec:
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080
+  type: NodePort
+  selector:
+    app: graphql
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: graphql
+  namespace: default
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: graphql
+  template:
+    metadata:
+      labels:
+        app: graphql
+    spec:
+      containers:
+        - name: graphql
+          image: us.gcr.io/nodejs-atx/graphql-api:latest
+          imagePullPolicy: Always
+          env:
+            - name: SQL_HOST
+              value: "10.50.0.3"
+            - name: SQL_DATABASE
+              value: "production"
+            - name: SQL_USERNAME
+              value: "username"
+            - name: SQL_PASSWORD
+              value: "!str0ngp4ssw0rd12#4%!"
+            - name: REDIS_HOST
+              value: "10.0.0.3"

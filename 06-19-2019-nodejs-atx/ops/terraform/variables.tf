@@ -19,4 +19,3 @@ variable "cloud_sql_password" {
   type        = string
   description = "The password for the cloud sql instance"
 }
-
