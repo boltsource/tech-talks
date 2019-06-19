@@ -1,0 +1,31 @@
+#!/bin/bash
+
+set -e
+
+# Login to Google Cloud
+gcloud auth login
+
+# Set the compute zone
+gcloud config set compute/zone us-central1-a
+
+# Set the project
+gcloud config set project $PROJECT_ID
+
+# Enable API-based resource management for project, needed by Terraform
+gcloud services enable cloudresourcemanager.googleapis.com 
+
+# Create a service account for Terraform
+gcloud beta iam service-accounts create sa-terraform \
+    --description "Terraform service account" \
+    --display-name "Terraform SA"
+
+# Grant the service account "owner" role, for brevity
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+    --member serviceAccount:sa-terraform@$PROJECT_ID.iam.gserviceaccount.com \
+    --role roles/owner
+
+# Create a local key for the service account that Terraform can use
+gcloud iam service-accounts keys create service-account.json \
+    --iam-account sa-terraform@$PROJECT_ID.iam.gserviceaccount.com
+
+

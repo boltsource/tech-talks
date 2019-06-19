@@ -1,0 +1,13 @@
+# NodeJS stuff
+node_modules
+dist
+*.log*
+package-lock.json
+.npm
+
+# Terraform stuff
+.terraform*
+terraform.*
+
+# Service account key
+service-account.json
