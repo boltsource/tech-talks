@@ -33,3 +33,9 @@ tunnel: .PHONY
 
 ngrok: .PHONY
 	ngrok http -subdomain boltsource 8080
+
+get-sql-info: .PHONY
+	gcloud beta sql instances list
+
+get-redis-info: .PHONY
+	gcloud beta redis instances list

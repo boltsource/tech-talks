@@ -89,7 +89,7 @@ resource "google_sql_database_instance" "master" {
       # by other components peered into it's network such as GKE
       ipv4_enabled    = "false"
       # Stick it on the same network as Kubernetes
-      private_network = google_container_cluster.main_cluster.network
+      private_network = "projects/nodejs-atx-boltsource-2019/global/networks/default"
     }
   }
 }
