@@ -28,4 +28,4 @@ gcloud projects add-iam-policy-binding $PROJECT_ID \
 gcloud iam service-accounts keys create service-account.json \
     --iam-account sa-terraform@$PROJECT_ID.iam.gserviceaccount.com
 
-
+gcloud auth configure-docker

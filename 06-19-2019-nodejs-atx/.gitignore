@@ -11,3 +11,5 @@ terraform.*
 
 # Service account key
 service-account.json
+
+workbench
