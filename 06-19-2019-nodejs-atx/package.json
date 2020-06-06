@@ -3,7 +3,7 @@
     "@types/bluebird": "^3.5.27",
     "@types/sequelize": "^4.28.3",
     "apollo-server": "^2.6.3",
-    "apollo-server-express": "^2.6.3",
+    "apollo-server-express": "^2.14.2",
     "bluebird": "^3.5.5",
     "express": "^4.17.1",
     "graphql": "^14.3.1",
